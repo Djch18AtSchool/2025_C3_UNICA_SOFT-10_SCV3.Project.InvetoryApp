@@ -51,7 +51,7 @@ public class ProductTableModel extends AbstractTableModel {
             case 4: return p.getPrice();
             case 5: return p.getQuantity();
             case 6:
-                return p.getImagePaths().isEmpty() ? null : p.getImagePaths().getFirst();
+                return p.getImagePaths().isEmpty() ? null : p.getImagePaths().get(0);
             case 7: return p.getDescription();
             default: return "";
         }
