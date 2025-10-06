@@ -1,14 +1,14 @@
 package com.gestioninventario.inventory.common;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 /**
  * Lista enlazada simple genérica.
- * Provee operaciones básicas: addFirst, addLast, removeIf, findFirst, toList.
+ * Provee operaciones básicas: addFirst, addLast, removeIf, findFirst.
  */
-public class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> implements Iterable<T> {
     private Node<T> head;
     private int size = 0;
 
@@ -36,16 +36,6 @@ public class SinglyLinkedList<T> {
             cur.setNext(node);
         }
         size++;
-    }
-
-    public List<T> toList() {
-        List<T> list = new ArrayList<>();
-        Node<T> cur = head;
-        while (cur != null) {
-            list.add(cur.getValue());
-            cur = cur.getNext();
-        }
-        return list;
     }
 
     /**
@@ -98,5 +88,22 @@ public class SinglyLinkedList<T> {
         }
         return false;
     }
-}
 
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private Node<T> current = head;
+
+            @Override
+            public boolean hasNext() { return current != null; }
+
+            @Override
+            public T next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                T value = current.getValue();
+                current = current.getNext();
+                return value;
+            }
+        };
+    }
+}

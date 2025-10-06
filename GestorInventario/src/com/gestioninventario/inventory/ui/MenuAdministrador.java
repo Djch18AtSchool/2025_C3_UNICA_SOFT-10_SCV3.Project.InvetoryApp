@@ -37,7 +37,7 @@ public class MenuAdministrador extends JFrame {
     private ProductTableModel tableModel;
 
     // Selected image files staging (before saving)
-    private List<Path> stagedImagePaths = new ArrayList<>();
+    private final List<Path> stagedImagePaths = new ArrayList<>();
 
     public MenuAdministrador() {
         // init repo & service (in memory)
@@ -273,8 +273,7 @@ public class MenuAdministrador extends JFrame {
     }
 
     private void refreshTable() {
-        List<Product> all = productService.getAll();
-        tableModel.setData(all);
+        tableModel.setData(productService.getAll());
     }
 
     private void onDeleteSelected() {

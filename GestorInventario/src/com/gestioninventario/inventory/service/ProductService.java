@@ -2,6 +2,7 @@ package com.gestioninventario.inventory.service;
 
 import com.gestioninventario.inventory.domain.Product;
 import com.gestioninventario.inventory.repository.ProductRepository;
+import com.gestioninventario.inventory.common.SinglyLinkedList;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -9,10 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Lógica de aplicación / reglas (servicio).
- * También incluye util básico para guardar imágenes en disco.
- */
 public class ProductService {
     private final ProductRepository repository;
     private final Path imagesFolder;
@@ -35,7 +32,7 @@ public class ProductService {
         repository.save(product);
     }
 
-    public List<Product> getAll() {
+    public SinglyLinkedList<Product> getAll() {
         return repository.findAll();
     }
 
@@ -46,7 +43,6 @@ public class ProductService {
     public boolean deleteById(String id) {
         Product p = repository.findById(id);
         if (p != null) {
-            // opcional: borrar imágenes físicas
             for (String path : p.getImagePaths()) {
                 try {
                     Files.deleteIfExists(Paths.get(path));
@@ -57,9 +53,6 @@ public class ProductService {
         return false;
     }
 
-    /**
-     * Copia archivos a la carpeta images con nombre único y devuelve las rutas resultantes.
-     */
     public List<String> storeImageFiles(List<Path> sourcePaths) {
         List<String> stored = new ArrayList<>();
         for (Path src : sourcePaths) {

@@ -3,13 +3,10 @@ package com.gestioninventario.inventory.repository;
 import com.gestioninventario.inventory.domain.Product;
 import com.gestioninventario.inventory.common.SinglyLinkedList;
 
-import java.util.List;
-
 public class ProductRepository {
     private final SinglyLinkedList<Product> products = new SinglyLinkedList<>();
 
     public void save(Product product) {
-        // si ya existe (por id) lo reemplaza; si no, lo agrega al final
         Product existing = products.findFirst(p -> p.getId().equals(product.getId()));
         if (existing != null) {
             products.replaceFirstIf(p -> p.getId().equals(product.getId()), product);
@@ -18,8 +15,8 @@ public class ProductRepository {
         }
     }
 
-    public List<Product> findAll() {
-        return products.toList();
+    public SinglyLinkedList<Product> findAll() {
+        return products;
     }
 
     public Product findById(String id) {
