@@ -1,7 +1,7 @@
-// ProductTableModel.java
 package com.gestioninventario.inventory.ui;
 
 import com.gestioninventario.inventory.domain.Product;
+import com.gestioninventario.inventory.common.SinglyLinkedList;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -13,10 +13,16 @@ import java.util.List;
  */
 public class ProductTableModel extends AbstractTableModel {
     private final String[] columns = {"ID","Categoría","Marca","Nombre","Precio","Cant","Miniatura","Descripción"};
-    private List<Product> data = new ArrayList<>();
+    private final List<Product> data = new ArrayList<>(); // buffer interno para JTable
 
-    public void setData(List<Product> data) {
-        this.data = data;
+    /**
+     * Limpia los datos actuales y carga productos desde la lista enlazada.
+     */
+    public void setData(SinglyLinkedList<Product> products) {
+        data.clear();
+        for (Product p : products) {
+            data.add(p);
+        }
         fireTableDataChanged();
     }
 
@@ -45,7 +51,7 @@ public class ProductTableModel extends AbstractTableModel {
             case 4: return p.getPrice();
             case 5: return p.getQuantity();
             case 6:
-                return p.getImagePaths().isEmpty() ? null : p.getImagePaths().getFirst();
+                return p.getImagePaths().isEmpty() ? null : p.getImagePaths().get(0);
             case 7: return p.getDescription();
             default: return "";
         }
