@@ -13,6 +13,7 @@ public class Product {
     private double price;
     private int quantity;
     private String description;
+    private Product next; // Enlace al siguiente producto en la lista enlazada
 
     public Product(String id, String category, String brand, String name,
                    double price, int quantity, String description) {
@@ -50,6 +51,9 @@ public class Product {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public Product getNext() { return next; }
+    public void setNext(Product next) { this.next = next; }
 
     @Override
     public String toString() {

@@ -1,10 +1,10 @@
 package com.gestioninventario.inventory.repository;
 
 import com.gestioninventario.inventory.domain.Product;
-import com.gestioninventario.inventory.common.SinglyLinkedList;
+import com.gestioninventario.inventory.common.ProductLinkedList;
 
 public class ProductRepository {
-    private final SinglyLinkedList<Product> products = new SinglyLinkedList<>();
+    private final ProductLinkedList products = new ProductLinkedList();
 
     public void save(Product product) {
         Product existing = products.findFirst(p -> p.getId().equals(product.getId()));
@@ -15,7 +15,7 @@ public class ProductRepository {
         }
     }
 
-    public SinglyLinkedList<Product> findAll() {
+    public ProductLinkedList findAll() {
         return products;
     }
 

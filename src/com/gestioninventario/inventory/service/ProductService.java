@@ -2,7 +2,7 @@ package com.gestioninventario.inventory.service;
 
 import com.gestioninventario.inventory.domain.Product;
 import com.gestioninventario.inventory.repository.ProductRepository;
-import com.gestioninventario.inventory.common.SinglyLinkedList;
+import com.gestioninventario.inventory.common.ProductLinkedList;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -32,7 +32,7 @@ public class ProductService {
         repository.save(product);
     }
 
-    public SinglyLinkedList<Product> getAll() {
+    public ProductLinkedList getAll() {
         return repository.findAll();
     }
 

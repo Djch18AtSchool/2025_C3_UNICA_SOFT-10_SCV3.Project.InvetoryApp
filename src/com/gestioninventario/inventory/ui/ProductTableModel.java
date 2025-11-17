@@ -1,7 +1,7 @@
 package com.gestioninventario.inventory.ui;
 
 import com.gestioninventario.inventory.domain.Product;
-import com.gestioninventario.inventory.common.SinglyLinkedList;
+import com.gestioninventario.inventory.common.ProductLinkedList;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class ProductTableModel extends AbstractTableModel {
     /**
      * Limpia los datos actuales y carga productos desde la lista enlazada.
      */
-    public void setData(SinglyLinkedList<Product> products) {
+    public void setData(ProductLinkedList products) {
         data.clear();
         for (Product p : products) {
             data.add(p);
