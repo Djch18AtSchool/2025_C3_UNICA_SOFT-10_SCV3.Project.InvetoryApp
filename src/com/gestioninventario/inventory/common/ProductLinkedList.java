@@ -145,7 +145,7 @@ public class ProductLinkedList implements Iterable<Product> {
      * El costo de cada producto es precio * cantidad.
      * @return El costo total.
      */
-    public double calcularCostoTotal() {
+    public double calculateTotalCost() {
         double total = 0.0;
         Product current = head;
         
